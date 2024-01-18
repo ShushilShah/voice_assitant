@@ -9,6 +9,9 @@ engine = pyttsx3.init()
 
 # Implement voice input and processing
 
+engine.say("Hello!, My name is Talker.")
+engine.runAndWait()
+
 
 def process_voice_input():
     with sr.Microphone() as source:
