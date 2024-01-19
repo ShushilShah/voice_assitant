@@ -11,7 +11,7 @@ recognizer = sr.Recognizer()
 # Set up the text-to-speech engine
 engine = pyttsx3.init()
 
-engine.setProperty('rate', 97)
+engine.setProperty('rate', 105)
 
 load_dotenv()
 # connecting to sql database
