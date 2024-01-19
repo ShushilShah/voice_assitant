@@ -24,6 +24,10 @@ cursor.execute(
     '''Insert into CONTENT values('I hate you','Sorry, I am a machine. I do not have any feelings')''')
 cursor.execute(
     '''Insert into CONTENT values('Ram','Lord Rama is a hindu religion god known as Purusotam Ram')''')
+cursor.execute(
+    '''Insert into CONTENT values('who am i','You are Shushil Shah who built me.')''')
+
+
 # Displaying data
 
 print("The inserted data")
