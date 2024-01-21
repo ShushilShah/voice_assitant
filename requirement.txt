@@ -1,3 +1,9 @@
 openai
 langchain
-speech_recognition
+flask
+SpeechRecognition
+pyttsx3
+langchain_experimental
+langchain_openai
+python-dotenv
+pyaudio
