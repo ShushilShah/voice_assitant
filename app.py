@@ -29,47 +29,38 @@ db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 
 
 def process_voice_input():
-    with sr.Microphone() as source:
-        print("Listening...")
-        audio = recognizer.listen(source)
+    terminate = False
+    while not terminate:
+        with sr.Microphone() as source:
+            print("Listening...")
+            audio = recognizer.listen(source)
 
-    try:
-        print("Recognizing...")
-        query = recognizer.recognize_google(audio)
-        print("You said:", query)
+        try:
+            print("Recognizing...")
+            query = recognizer.recognize_google(audio)
+            print("You said:", query)
+
+            if query.lower() == "Kill":
+                print("Process terminated. Have a nice day")
+                terminate = True
+                continue
+
+            response = generate_response(query)
+            print("Assistant:", response)
 
         # Generate a response based on the voice input
-        response = generate_response(query)
-        print("Assistant:", response)
 
         # Implement voice output using the text-to-speech engine
-        engine.say(response)
-        engine.runAndWait()
+            engine.say(response)
+            engine.runAndWait()
 
-    except sr.UnknownValueError:
-        print("Sorry, I could not understand your voice.")
-    except sr.RequestError:
-        print("Sorry, there was an issue with the speech recognition service.")
+        except sr.UnknownValueError:
+            print("Sorry, I could not understand your voice.")
+        except sr.RequestError:
+            print("Sorry, there was an issue with the speech recognition service.")
 
 # Generate a response based on the user query
 
-
-# def generate_response(query):
-#     predefined_responses = {
-#         "hello": "Hello! How can I assist you?",
-#         "name": "My name is talker",
-#         "age": "Your age is 23 years",
-#         "capital": "Kathmandu",
-#         "datascience": " Data science is the study of data and its behavoir",
-#         "weather": "The weather today is sunny.",
-#         "time": "The current time which is  {}".format(datetime.datetime.now().strftime("%H:%M")),
-#         # Add more queries and responses as needed
-#     }
-
-#     if query.lower() in predefined_responses:
-#         return predefined_responses[query.lower()]
-#     else:
-#         return "I'm sorry, I don't have a response for that query."
 
 def generate_response(query):
     result = handle_user_query(query)
