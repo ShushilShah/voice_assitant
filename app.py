@@ -33,7 +33,7 @@ def process_voice_input():
     while not terminate:
         with sr.Microphone() as source:
             print("Listening...")
-            audio = recognizer.listen(source)
+            audio = recognizer.listen(source, timeout=5)
 
         try:
             print("Recognizing...")
