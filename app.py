@@ -6,12 +6,13 @@ from langchain_community.utilities import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain_openai import OpenAI
 from dotenv import load_dotenv
+
+app = Flask(__name__)
 # Set up the speech recognizer
 recognizer = sr.Recognizer()
 
 # Set up the text-to-speech engine
 engine = pyttsx3.init()
-
 engine.setProperty('rate', 105)
 
 load_dotenv()
@@ -22,13 +23,11 @@ db = SQLDatabase.from_uri("sqlite:///content.db")
 llm = OpenAI(temperature=0)
 db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# Implement voice input and processing
-
-# engine.say("Hello!, My name is Talker.")
-# engine.runAndWait()
-
-
+@app.route('/process',methods=['POST'])
 def process_voice_input():
     terminate = False
     while not terminate:
@@ -81,3 +80,6 @@ def handle_user_query(query):
 
 # Call the function to start processing voice input
 process_voice_input()
+
+if __name__ == "__main__":
+    app.run(debug=True)
