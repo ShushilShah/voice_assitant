@@ -25,7 +25,7 @@ cursor.execute(
 cursor.execute(
     '''Insert into CONTENT values('Ram','Lord Rama is a hindu religion god known as Purusotam Ram')''')
 cursor.execute(
-    '''Insert into CONTENT values('who am i','You are Shushil Shah who built me.')''')
+    '''Insert into CONTENT values('who am I','You are Shushil Shah who built me.')''')
 
 
 # Displaying data
