@@ -1,5 +1,5 @@
 import speech_recognition as sr
-from flask import Flask, render_template, request
+from flask import Flask, render_template, jsonify
 import pyttsx3
 import datetime
 from langchain_community.utilities import SQLDatabase
